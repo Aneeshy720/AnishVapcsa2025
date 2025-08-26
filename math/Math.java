@@ -47,13 +47,27 @@ class Math {
 
     //Try doing some math operations with numbers. How can we check to see if the math worked?
 
+    System.out.println("3+2 = "+(3+2)); 
+    System.out.println("3-2 = "+(3-2));
+    System.out.println("3*2 = "+(3*2));
+
     //Create codes that will print the following:
 
     //Odd integers from 1 to 100, inclusive of both
 
+      for(int i = 1; i<=100; i+=2){
+        System.out.println(i); 
+      }
+      System.out.println(); 
+
 
 
     //All multiples of 3 from 1 to 100
+
+      for(int i = 3; i<=100; i+=3){
+        System.out.println(i); 
+      }
+
 
 
 
