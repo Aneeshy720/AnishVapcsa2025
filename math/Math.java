@@ -50,28 +50,32 @@ class Math {
     System.out.println("3+2 = "+(3+2)); 
     System.out.println("3-2 = "+(3-2));
     System.out.println("3*2 = "+(3*2));
+    System.out.println("15%4 = "+15%4); 
 
     //Create codes that will print the following:
 
     //Odd integers from 1 to 100, inclusive of both
 
       for(int i = 1; i<=100; i+=2){
-        System.out.println(i); 
+        System.out.print(i+" "); 
       }
       System.out.println(); 
+      System.out.println();
 
 
 
     //All multiples of 3 from 1 to 100
 
       for(int i = 3; i<=100; i+=3){
-        System.out.println(i); 
+        System.out.print(i+" "); 
       }
-
-
-
+      System.out.println(); 
+      System.out.println(); 
 
 
     //Starting at 1000, print on the same line (with a - [hypthen] between each) all of the numbers that end in 0 going down to 0
+      for(int i = 1000; i>=0; i = i-10){
+        System.out.print(i+" - "); 
+      }
   }
 }
