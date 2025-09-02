@@ -77,5 +77,21 @@ class Math {
       for(int i = 1000; i>=0; i = i-10){
         System.out.print(i+" - "); 
       }
+      System.out.println();
+      System.out.println();
+
+
+      //System.out.println("#/0"+(9/0));
+      System.out.println();
+      int totalChocolates = 95; 
+      int students = 33;
+      double chocolatesPerStudent = totalChocolates / (students * 1.0); 
+      System.out.println(chocolatesPerStudent);
+
+      System.out.println("Anish");
+      for(int i = 1; i<=9; i+=2){
+        System.out.println(i+" "); 
+      }
+
   }
 }
