@@ -71,6 +71,7 @@ public class Roomba implements Directions {
 				roomba.pickBeeper(); 
 				} 
 			}
+			turnRight(roomba); 
 
 		/** This section will have all the logic that takes the Robot to every location
 		 * and cleans up all piles of beepers. Think about ways you can break this
