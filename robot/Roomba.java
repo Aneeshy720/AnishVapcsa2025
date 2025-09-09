@@ -7,17 +7,20 @@ public class Roomba implements Directions {
 	// Main method to make this self-contained
 	public static void main(String[] args) {
 		// LEAVE THIS ALONE!!!!!!
-		String worldName = "robot/basicRoom.wld";
-		World.setDelay(10);
+		String worldName = "robot/TestWorld-1.wld";
+		World.setDelay(1);
 		Roomba cleaner = new Roomba();
-		int totalBeepers = cleaner.cleanRoom(worldName, 7, 7);
-		System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");  
+		int totalBeepers = cleaner.cleanRoom(worldName, 25, 13);
+		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");  
+		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " piles.");
 	}
 
 	// declared here so it is visible in all the methods!
 	private Robot roomba;
 
 	// You will need to add many variables!!
+
+
 
 
 	public int cleanRoom(String worldName, int startX, int startY) {
@@ -27,51 +30,44 @@ public class Roomba implements Directions {
 
 		World.readWorld(worldName);
 		World.setVisible(true);
+		boolean end = true;
 		roomba = new Robot(startX, startY, East, 0); 
+		int count = 0; 
+		int pileSize = 0;  
+		while(end){
+			while(roomba.frontIsClear()){
+				roomba.move(); 
+				if(roomba.nextToABeeper() == true){
+					pileSize++; 
+					while(roomba.nextToABeeper()){
+						roomba.pickBeeper(); 
+						count++; 
+				} 
+			}
+				//pileSize++; 
+			}
+			if(roomba.facingEast() && !roomba.frontIsClear()){
+				roomba.turnLeft(); 
+				roomba.move();
+				roomba.turnLeft(); 
+			}
+			else if(roomba.facingWest() && !roomba.frontIsClear()){
+				turnRight(roomba); 
+				roomba.move(); 
+				turnRight(roomba); 
+			}
+			if(roomba.facingNorth() && !roomba.frontIsClear()){
+				end = false;
+			}
+		
+		} 
+		System.out.println("Total Beepers = "+ count);
+		System.out.println("Total Piles = "+ pileSize); 
+		return pileSize; 
+		
+		
 
-			while(roomba.frontIsClear()){
-				roomba.move(); 
-				while(roomba.nextToABeeper()){
-				roomba.pickBeeper(); 
-				} 
-			}
-			roomba.turnLeft(); 
-			roomba.move();
-			roomba.turnLeft(); 
-			while(roomba.frontIsClear()){
-				roomba.move(); 
-				while(roomba.nextToABeeper()){
-				roomba.pickBeeper(); 
-				} 
-			}
-			turnRight(roomba); 
-			roomba.move(); 
-			turnRight(roomba); 
-			while(roomba.frontIsClear()){
-				roomba.move(); 
-				while(roomba.nextToABeeper()){
-				roomba.pickBeeper(); 
-				} 
-			}
-			roomba.turnLeft(); 
-			roomba.move();
-			roomba.turnLeft(); 
-			while(roomba.frontIsClear()){
-				roomba.move(); 
-				while(roomba.nextToABeeper()){
-				roomba.pickBeeper(); 
-				} 
-			}
-			turnRight(roomba); 
-			roomba.move(); 
-			turnRight(roomba);
-			while(roomba.frontIsClear()){
-				roomba.move(); 
-				while(roomba.nextToABeeper()){
-				roomba.pickBeeper(); 
-				} 
-			}
-			turnRight(roomba); 
+			
 
 		/** This section will have all the logic that takes the Robot to every location
 		 * and cleans up all piles of beepers. Think about ways you can break this
@@ -82,9 +78,9 @@ public class Roomba implements Directions {
 		// what is that and why are we getting it?
 
 
-		int totalBeepers = 20; // Need to move this somewhere else.
+		//int totalBeepers = 20; // Need to move this somewhere else.
         // This method should return the total number of beepers cleaned up.
-		return totalBeepers;
+		//return totalBeepers;
 	}
 
 	public static void turnRight(Robot roomba){
