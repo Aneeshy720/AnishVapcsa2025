@@ -33,15 +33,29 @@ public class Roomba implements Directions {
 		boolean end = true;
 		roomba = new Robot(startX, startY, East, 0); 
 		int count = 0; 
+		int units = 0; 
 		int pileSize = 0;  
+		int max = 0; 
+		int street = startX; 
+		int ave = startY; 
+		roomba.street();
 		while(end){
 			while(roomba.frontIsClear()){
 				roomba.move(); 
+				units++; 
+				int max2 = 0;
 				if(roomba.nextToABeeper() == true){
 					pileSize++; 
 					while(roomba.nextToABeeper()){
 						roomba.pickBeeper(); 
 						count++; 
+						max2 += 1;
+						if(max2 >= max){
+							max = max2;
+							street = roomba.street(); 
+							ave = roomba.avenue(); 
+						}
+						
 				} 
 			}
 				//pileSize++; 
@@ -63,6 +77,9 @@ public class Roomba implements Directions {
 		} 
 		System.out.println("Total Beepers = "+ count);
 		System.out.println("Total Piles = "+ pileSize); 
+		System.out.println("Total Squares traveled: "+units); 
+		System.out.println("Max: "+max); 
+		System.out.println("Coordinates: ("+street+ ", "+ave+")"); 
 		return pileSize; 
 		
 		
