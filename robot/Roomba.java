@@ -8,9 +8,9 @@ public class Roomba implements Directions {
 	public static void main(String[] args) {
 		// LEAVE THIS ALONE!!!!!!
 		String worldName = "robot/TestWorld-1.wld";
-		World.setDelay(1);
+		World.setDelay(0);
 		Roomba cleaner = new Roomba();
-		int totalBeepers = cleaner.cleanRoom(worldName, 25, 13);
+		int totalBeepers = cleaner.cleanRoom(worldName, 25, 11);
 		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");  
 		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " piles.");
 	}
@@ -62,24 +62,34 @@ public class Roomba implements Directions {
 			}
 			if(roomba.facingEast() && !roomba.frontIsClear()){
 				roomba.turnLeft(); 
+				if(!roomba.frontIsClear()){
+					end = false;
+				}
 				roomba.move();
+				units++; 
 				roomba.turnLeft(); 
 			}
 			else if(roomba.facingWest() && !roomba.frontIsClear()){
 				turnRight(roomba); 
 				roomba.move(); 
+				units++;  
 				turnRight(roomba); 
 			}
-			if(roomba.facingNorth() && !roomba.frontIsClear()){
+			/*if(roomba.facingNorth() && !roomba.frontIsClear()){
 				end = false;
-			}
+			}*/
 		
 		} 
+		double averagePileSize = (double)count/pileSize ; 
+		double percentDirty = (double)pileSize / units; 
 		System.out.println("Total Beepers = "+ count);
 		System.out.println("Total Piles = "+ pileSize); 
 		System.out.println("Total Squares traveled: "+units); 
 		System.out.println("Max: "+max); 
 		System.out.println("Coordinates: ("+street+ ", "+ave+")"); 
+		System.out.println("Coordinates ")
+		System.out.println("Average Pile size = "+ averagePileSize); 
+		System.out.println("Percent dirty: "+percentDirty); 
 		return pileSize; 
 		
 		
