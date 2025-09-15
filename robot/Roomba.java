@@ -6,10 +6,10 @@ public class Roomba implements Directions {
 
 	public static void main(String[] args) {
 		// LEAVE THIS ALONE!!!!!!
-		String worldName = "robot/TestWorld-1.wld";
+		String worldName = "robot/finalTestWorld2024.wld";
 		World.setDelay(0);
 		Roomba cleaner = new Roomba();
-		int totalBeepers = cleaner.cleanRoom(worldName, 25, 11);
+		int totalBeepers = cleaner.cleanRoom(worldName, 26, 101);
 		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");  
 		//System.out.println("Roomba cleaned up a total of " + totalBeepers + " piles.");
 	}
@@ -22,77 +22,90 @@ public class Roomba implements Directions {
 		// A new Robot should be constructed and assigned to the global (instance) variable named roomba that is declared above.
         // Make sure it starts at startX and startY location.
 
+		//initializing variables
 		World.readWorld(worldName);
 		World.setVisible(true);
 		boolean end = true;
 		roomba = new Robot(startX, startY, East, 0); 
-		int numOfBeepers = 0; 
-		int units = 0; 
+		int beeperNum = 0; 
+		int squares = 0; 
 		int numOfPiles = 0;  
-		int pileOfMaxBeepers = 0; 
+		int maxBeeperPile = 0; 
 		int street = roomba.street();   
 		int ave = roomba.avenue();      
-
+		if (roomba.nextToABeeper()) {
+        	numOfPiles++;
+        	int currentPileSize = 0;
+        while (roomba.nextToABeeper()) {
+            roomba.pickBeeper(); 
+            beeperNum++; 
+            currentPileSize++; 
+        }
+        if (currentPileSize > maxBeeperPile) {
+            maxBeeperPile = currentPileSize;
+            street = roomba.street(); 
+            ave = roomba.avenue(); 
+        }
+    }
+		// The "while(end)" command allows this loop to iterate indefinitely until there are no more squares to cover.
 		while(end){
-			while(roomba.frontIsClear()){
+			while(roomba.frontIsClear()){ //As long as the front is clear, the roomba will keep moving 
 				roomba.move(); 
-				units++; 
-				int max2 = 0;
+				squares++; 
 				if(roomba.nextToABeeper() == true){
-
 					numOfPiles++; 
 					int currentPileSize = 0;
 					while(roomba.nextToABeeper()){
 						roomba.pickBeeper(); 
-						numOfBeepers++; 
-						max2 += 1;
-						if(max2 >= pileOfMaxBeepers){
-							pileOfMaxBeepers = max2;
+						beeperNum++; 
+						currentPileSize++; 
+					}
+						if(currentPileSize >= maxBeeperPile){
+							maxBeeperPile = currentPileSize;
 							street = roomba.street(); 
 							ave = roomba.avenue(); 
 						}
-					} 
 				}
 			}
-			if(roomba.facingEast() && !roomba.frontIsClear()){
+			if(roomba.facingEast() && !roomba.frontIsClear()){ //If the roomba is facing east and the front is not clear, then the roomba will do this following in the condition
 				roomba.turnLeft(); 
 				if(!roomba.frontIsClear()){
-					units++;
+					squares++;
 					end = false;
 				}
-				else{
+				else{ 
 					roomba.move();
-					units++; 
+					squares++; 
 					roomba.turnLeft(); 
 				}
 				; 
 			}
-			else if(roomba.facingWest() && !roomba.frontIsClear()){
+			else if(roomba.facingWest() && !roomba.frontIsClear()){ //If the roomba is facing west and the front is not clear, then the roomba will do this following in the condition
 				turnRight(roomba); 
-				if(!roomba.frontIsClear()){
-					units++; 
+				if(!roomba.frontIsClear()){  
+					squares++;
 					end = false; 
 				}else{
 				roomba.move(); 
-				units++;  
+				squares++;  
 				turnRight(roomba); 
 				}
 			}
 		} 
+		 
+		//equations to find the average pile size and the percentage of the room dirty
+		double averagePileSize = (double)beeperNum/numOfPiles ; 
+		double percentDirty = (double)numOfPiles / squares; 
 
-		double averagePileSize = (double)numOfBeepers/numOfPiles ; 
-		double percentDirty = (double)numOfPiles / units; 
-
-		
-		System.out.println("Total number of Beepers = "+ numOfBeepers);
+		//print statements
+		System.out.println("Total number of Beepers = "+ beeperNum);
 		System.out.println("Total number of Piles = "+ numOfPiles); 
-		System.out.println("Total Squares traveled: "+units); 
-		System.out.println("The maximum number of beepers in a pile is "+pileOfMaxBeepers); 
+		System.out.println("Total Squares traveled: "+squares); 
+		System.out.println("The maximum number of beepers in a pile is "+maxBeeperPile); 
 		System.out.println("Coordinates: ("+street+ ", "+ave+")"); 
-		//System.out.println("Relative Coordinates: ("+(street-startX)+", "+(ave - startY)+")");
+		System.out.println("Relative Position: "+(street-startX)+" units right and "+(ave - startY)+" units up.");
 		System.out.println("Average Pile size = "+ averagePileSize); 
 		System.out.println("Percent dirty: "+percentDirty); 
-
 		return numOfPiles; 
 	}
 
