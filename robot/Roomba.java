@@ -4,7 +4,6 @@ import kareltherobot.*;
 
 public class Roomba implements Directions {
 
-	// Main method to make this self-contained
 	public static void main(String[] args) {
 		// LEAVE THIS ALONE!!!!!!
 		String worldName = "robot/TestWorld-1.wld";
@@ -18,11 +17,6 @@ public class Roomba implements Directions {
 	// declared here so it is visible in all the methods!
 	private Robot roomba;
 
-	// You will need to add many variables!!
-
-
-
-
 	public int cleanRoom(String worldName, int startX, int startY) {
 
 		// A new Robot should be constructed and assigned to the global (instance) variable named roomba that is declared above.
@@ -32,82 +26,74 @@ public class Roomba implements Directions {
 		World.setVisible(true);
 		boolean end = true;
 		roomba = new Robot(startX, startY, East, 0); 
-		int count = 0; 
+		int numOfBeepers = 0; 
 		int units = 0; 
-		int pileSize = 0;  
-		int max = 0; 
-		int street = startX; 
-		int ave = startY; 
-		roomba.street();
+		int numOfPiles = 0;  
+		int pileOfMaxBeepers = 0; 
+		int street = roomba.street();   
+		int ave = roomba.avenue();      
+
 		while(end){
 			while(roomba.frontIsClear()){
 				roomba.move(); 
 				units++; 
 				int max2 = 0;
 				if(roomba.nextToABeeper() == true){
-					pileSize++; 
+
+					numOfPiles++; 
+					int currentPileSize = 0;
 					while(roomba.nextToABeeper()){
 						roomba.pickBeeper(); 
-						count++; 
+						numOfBeepers++; 
 						max2 += 1;
-						if(max2 >= max){
-							max = max2;
+						if(max2 >= pileOfMaxBeepers){
+							pileOfMaxBeepers = max2;
 							street = roomba.street(); 
 							ave = roomba.avenue(); 
 						}
-						
-				} 
-			}
-				//pileSize++; 
+					} 
+				}
 			}
 			if(roomba.facingEast() && !roomba.frontIsClear()){
 				roomba.turnLeft(); 
 				if(!roomba.frontIsClear()){
+					units++;
 					end = false;
 				}
-				roomba.move();
-				units++; 
-				roomba.turnLeft(); 
+				else{
+					roomba.move();
+					units++; 
+					roomba.turnLeft(); 
+				}
+				; 
 			}
 			else if(roomba.facingWest() && !roomba.frontIsClear()){
 				turnRight(roomba); 
+				if(!roomba.frontIsClear()){
+					units++; 
+					end = false; 
+				}else{
 				roomba.move(); 
 				units++;  
 				turnRight(roomba); 
+				}
 			}
-			/*if(roomba.facingNorth() && !roomba.frontIsClear()){
-				end = false;
-			}*/
-		
 		} 
-		double averagePileSize = (double)count/pileSize ; 
-		double percentDirty = (double)pileSize / units; 
-		System.out.println("Total Beepers = "+ count);
-		System.out.println("Total Piles = "+ pileSize); 
+
+		double averagePileSize = (double)numOfBeepers/numOfPiles ; 
+		double percentDirty = (double)numOfPiles / units; 
+
+		
+		System.out.println("Total number of Beepers = "+ numOfBeepers);
+		System.out.println("Total number of Piles = "+ numOfPiles); 
 		System.out.println("Total Squares traveled: "+units); 
-		System.out.println("Max: "+max); 
+		System.out.println("The maximum number of beepers in a pile is "+pileOfMaxBeepers); 
 		System.out.println("Coordinates: ("+street+ ", "+ave+")"); 
-		System.out.println("Coordinates ")
+		//System.out.println("Relative Coordinates: ("+(street-startX)+", "+(ave - startY)+")");
 		System.out.println("Average Pile size = "+ averagePileSize); 
 		System.out.println("Percent dirty: "+percentDirty); 
-		return pileSize; 
-		
-		
 
-			
-
-		/** This section will have all the logic that takes the Robot to every location
-		 * and cleans up all piles of beepers. Think about ways you can break this
-		 * large, complex task into smaller, easier to solve problems.
-		 */
-
-		// the line below causes a null pointer exception
-		// what is that and why are we getting it?
-
-
-		//int totalBeepers = 20; // Need to move this somewhere else.
-        // This method should return the total number of beepers cleaned up.
-		//return totalBeepers;
+		return numOfPiles; 
 	}
 
 	public static void turnRight(Robot roomba){
