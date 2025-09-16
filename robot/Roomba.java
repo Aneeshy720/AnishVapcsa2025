@@ -90,8 +90,24 @@ public class Roomba implements Directions {
 				squares++;  
 				turnRight(roomba); 
 				}
+
 			}
-		} 
+
+			if (roomba.nextToABeeper()) {
+		numOfPiles++;
+		int currentPileSize = 0;
+		while (roomba.nextToABeeper()) {
+			roomba.pickBeeper();
+			beeperNum++;
+			currentPileSize++;
+		}
+		if (currentPileSize > maxBeeperPile) {
+			maxBeeperPile = currentPileSize;
+			street = roomba.street();
+			ave = roomba.avenue();
+			}
+		}
+	} 
 		 
 		//equations to find the average pile size and the percentage of the room dirty
 		double averagePileSize = (double)beeperNum/numOfPiles ; 
