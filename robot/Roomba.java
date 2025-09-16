@@ -119,7 +119,7 @@ public class Roomba implements Directions {
 		System.out.println("Total Squares traveled: "+squares); 
 		System.out.println("The maximum number of beepers in a pile is "+maxBeeperPile); 
 		System.out.println("Coordinates: ("+street+ ", "+ave+")"); 
-		System.out.println("Relative Position: "+(street-startX)+" units right and "+(ave - startY)+" units up.");
+		System.out.println("Relative Position: "+(street-startX)+" units up and "+(ave - startY)+" units right.");
 		System.out.println("Average Pile size = "+ averagePileSize); 
 		System.out.println("Percent dirty: "+percentDirty); 
 		return numOfPiles; 
