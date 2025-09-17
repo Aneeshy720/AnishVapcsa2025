@@ -33,6 +33,8 @@ public class Roomba implements Directions {
 		int maxBeeperPile = 0; 
 		int street = roomba.street();   
 		int ave = roomba.avenue();      
+
+		//this will detect of any beepers must be picked up in the beginning
 		if (roomba.nextToABeeper()) {
         	numOfPiles++;
         	int currentPileSize = 0;
@@ -67,7 +69,8 @@ public class Roomba implements Directions {
 						}
 				}
 			}
-			if(roomba.facingEast() && !roomba.frontIsClear()){ //If the roomba is facing east and the front is not clear, then the roomba will do this following in the condition
+			//If the roomba is facing east and the front is not clear, then the roomba will do this following in the condition
+			if(roomba.facingEast() && !roomba.frontIsClear()){ 
 				roomba.turnLeft(); 
 				if(!roomba.frontIsClear()){
 					squares++;
@@ -80,7 +83,8 @@ public class Roomba implements Directions {
 				}
 				; 
 			}
-			else if(roomba.facingWest() && !roomba.frontIsClear()){ //If the roomba is facing west and the front is not clear, then the roomba will do this following in the condition
+			//If the roomba is facing west and the front is not clear, then the roomba will do this following in the condition
+			else if(roomba.facingWest() && !roomba.frontIsClear()){ 
 				turnRight(roomba); 
 				if(!roomba.frontIsClear()){  
 					squares++;
@@ -93,7 +97,8 @@ public class Roomba implements Directions {
 
 			}
 
-			if (roomba.nextToABeeper()) {
+		//This will detect if any beepers must be picked up at the end.
+		if (roomba.nextToABeeper()) {  
 		numOfPiles++;
 		int currentPileSize = 0;
 		while (roomba.nextToABeeper()) {
@@ -111,7 +116,7 @@ public class Roomba implements Directions {
 		 
 		//equations to find the average pile size and the percentage of the room dirty
 		double averagePileSize = (double)beeperNum/numOfPiles ; 
-		double percentDirty = (double)numOfPiles / squares; 
+		double percentDirty = (double)numOfPiles / squares *100; 
 
 		//print statements
 		System.out.println("Total number of Beepers = "+ beeperNum);
@@ -121,10 +126,10 @@ public class Roomba implements Directions {
 		System.out.println("Coordinates: ("+street+ ", "+ave+")"); 
 		System.out.println("Relative Position: "+(street-startX)+" units up and "+(ave - startY)+" units right.");
 		System.out.println("Average Pile size = "+ averagePileSize); 
-		System.out.println("Percent dirty: "+percentDirty); 
+		System.out.println("Percent dirty: "+percentDirty+"%"); 
 		return numOfPiles; 
 	}
-
+	//method to turn right is a simplfication for turning left three times 
 	public static void turnRight(Robot roomba){
 		roomba.turnLeft(); 
 		roomba.turnLeft(); 
