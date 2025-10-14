@@ -32,9 +32,22 @@ public class PigLatinTranslator {
         String result = "";
 
         // TODO: Replace this code to correctly translate a single word.
+        String firstl; 
+        boolean end=true; 
+        int i = 0; 
+        while(end){
+            String sub =  input.substring(0+i,i+1); 
+            if(sub.equals("a")|| sub.equals("e")||sub.equals("i")||sub.equals("o")||sub.equals("u")){
+                return input + "ay"; 
+            }
+
+
+        }
+
+        result  = input.substring(1) + input.substring(0,1) +"ay";
         // Start here first!
         // This is the first place to work.
-        result = input; // delete this line
+        //result = input; // delete this line
 
         return result;
     }
