@@ -27,43 +27,79 @@ public class PigLatinTranslator {
     }
 
     private static String translateWord(String input) {
-        System.out.println("  -> translateWord('" + input + "')");
-        boolean end = ; 
-        String result = "";
-        String text = ""; 
-        int upperbound = 0; 
-        int lowerbound = 1; 
-        // TODO: Replace this code to correctly translate a single word.
-        String first = input.substring(lowerbound, upperbound);
-
-        boolean startsWithVowel1 = 
-            first.equals("a") || first.equals("e") ||
-            first.equals("i") || first.equals("o") ||
-            first.equals("u"); 
+        System.out.println("  -> translateWord('" + input + "')"); 
         
-        if (startsWithVowel1){
-            text = input.substring(upperbound) ; 
+        input = input.trim(); 
+        if(input.length()==0){
+            return input; 
         }
+        if(!Character.isAlphabetic(input.charAt(input.length()-1))){
+            char ch = input.charAt(input.length()-1); 
+            String noDot = input.substring(0, input.length()-1);  
+            String result = translateSimpleWordWithoutTrailingPunc(noDot); 
+            return result + ch; 
+        }
+    
         else{
-            for(int i = 0; i<input.indexOf('a'); i++){
-                char character = input.charAt(i); 
-
-            }
-
+            return translateSimpleWordWithoutTrailingPunc(input);
+            
         }
 
-        }
-
-        result  = input.substring(1) + input.substring(0,1) +"ay";
+        //String result  = input + "ay"; 
         // Start here first!
         // This is the first place to work.
         //result = input; // delete this line
+    }
+     
+    private static String translateSimpleWordWithoutTrailingPunc(String input) {
+        System.out.println("  -> translateWord('" + input + "')"); 
+        //String[] words = input.split(" ");
+        
+        input = input.trim(); 
+        if(input.length()==0){
+            return input; 
+        }
+        int indexOfVowel = -1; 
+        for(int i = 0; i<input.length(); i++){
+            char ch = input.charAt(i); 
+            if(isVowel(ch)){
+                indexOfVowel = i; 
+                break; 
+            }
+        } 
+        
+        if(indexOfVowel<=0){
+            return input + "ay"; 
+        }
 
-        return result;
+    
+        else{
+            if(Character.isUpperCase(input.charAt(0))){
+                return input.substring(indexOfVowel, indexOfVowel+1).toUpperCase() + 
+                input.substring(indexOfVowel+1) + 
+                input.substring(0, 1).toLowerCase() + 
+                input.substring(1,indexOfVowel) + 
+                "ay";
+            }
+            
+            return input.substring(indexOfVowel)+input.substring(0, indexOfVowel) + "ay"; 
+        }
+
+        //String result  = input + "ay"; 
+        // Start here first!
+        // This is the first place to work.
+        //result = input; // delete this line
+    }
+
+
+    private static boolean isVowel(char ch){
+        return ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'||
+        ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U'; 
     }
 
     // Add additonal private methods here.
     // For example, I had one like this:
     // private static String capitalizeFirstLetter(String input)
+
 
 }

@@ -9,10 +9,14 @@ public class TestSuite {
         // Single Words
         // Vowel first letter
         score += basicTest("eat", "eatay");
+        score += basicTest("sky.", "skyay.");
+        score += basicTest("Eat.", "Eatay.");
+
         // Single consonant
         score += basicTest("pig", "igpay");
         // Double consonant
         score += basicTest("trash", "ashtray");
+        score += basicTest("trash.", "ashtray.");
 
         // "null" :)
         score += basicTest("null", "ullnay");
