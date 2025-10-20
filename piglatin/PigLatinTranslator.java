@@ -28,19 +28,29 @@ public class PigLatinTranslator {
 
     private static String translateWord(String input) {
         System.out.println("  -> translateWord('" + input + "')");
-
+        boolean end = ; 
         String result = "";
-
+        String text = ""; 
+        int upperbound = 0; 
+        int lowerbound = 1; 
         // TODO: Replace this code to correctly translate a single word.
-        String firstl; 
-        boolean end=true; 
-        int i = 0; 
-        while(end){
-            String sub =  input.substring(0+i,i+1); 
-            if(sub.equals("a")|| sub.equals("e")||sub.equals("i")||sub.equals("o")||sub.equals("u")){
-                return input + "ay"; 
+        String first = input.substring(lowerbound, upperbound);
+
+        boolean startsWithVowel1 = 
+            first.equals("a") || first.equals("e") ||
+            first.equals("i") || first.equals("o") ||
+            first.equals("u"); 
+        
+        if (startsWithVowel1){
+            text = input.substring(upperbound) ; 
+        }
+        else{
+            for(int i = 0; i<input.indexOf('a'); i++){
+                char character = input.charAt(i); 
+
             }
 
+        }
 
         }
 
