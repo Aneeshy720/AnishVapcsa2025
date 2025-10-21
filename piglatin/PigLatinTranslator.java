@@ -1,9 +1,12 @@
 package piglatin;
+import java.util.Scanner; 
+
 
 public class PigLatinTranslator {
+
     public static Book translate(Book input) {
         Book translatedBook = new Book();
-
+         
         // TODO: Add code here to populate translatedBook with a translation of the
         // input book.
         // Curent do-nothing code will return an empty book.
@@ -13,16 +16,28 @@ public class PigLatinTranslator {
     }
 
     public static String translate(String input) {
-        System.out.println("  -> translate('" + input + "')");
 
-        String result = "";
+        System.out.println("  -> translate('" + input + "')");
+        String[] words = input.split(" ");
+        String result; 
+        if(input.contains(" ")){
+            for(String word : words){
+                result = translateSimpleWordWithoutTrailingPunc(word); 
+                return word; 
+            }
+        }
+        else{
+            return input; 
+        }
+
+
+
 
         // TODO: translate a string input, store in result.
         // The input to this function could be any English string.
         // It may be made up of many words.
         // This method must call translateWord once for each word in the string.
         result = translateWord(input);
-
         return result;
     }
 
@@ -96,6 +111,8 @@ public class PigLatinTranslator {
         return ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'||
         ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U'; 
     }
+
+
 
     // Add additonal private methods here.
     // For example, I had one like this:
