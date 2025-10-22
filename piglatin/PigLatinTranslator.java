@@ -18,31 +18,37 @@ public class PigLatinTranslator {
     public static String translate(String input) {
 
         System.out.println("  -> translate('" + input + "')");
-        String[] words = input.split(" ");
-        String result; 
-        if(input.contains(" ")){
-            for(String word : words){
-                result = translateSimpleWordWithoutTrailingPunc(word); 
-                return word; 
-            }
-        }
-        else{
-            return input; 
-        }
-
-
+       
 
 
         // TODO: translate a string input, store in result.
         // The input to this function could be any English string.
         // It may be made up of many words.
         // This method must call translateWord once for each word in the string.
-        result = translateWord(input);
+        String result = translateWord(input);
         return result;
     }
 
     private static String translateWord(String input) {
-        System.out.println("  -> translateWord('" + input + "')"); 
+        input = input.trim(); 
+        if(input.length()==0){
+            return input; 
+        }
+        String[] words = input.split("\\s+");
+        String result = ""; 
+        for(int i = 0; i<words.length; i++){
+            if(i==words.length-1){
+                result = result + translateSimpleWord(words[i]); 
+            }
+            else{
+                result = result + translateSimpleWord(words[i]) +" "; 
+            }
+        }
+        return result; 
+    }
+
+    private static String translateSimpleWord(String input) {
+        //System.out.println("  -> translateWord('" + input + "')"); 
         
         input = input.trim(); 
         if(input.length()==0){
@@ -67,7 +73,7 @@ public class PigLatinTranslator {
     }
      
     private static String translateSimpleWordWithoutTrailingPunc(String input) {
-        System.out.println("  -> translateWord('" + input + "')"); 
+       //System.out.println("  -> translateWord('" + input + "')"); 
         //String[] words = input.split(" ");
         
         input = input.trim(); 
