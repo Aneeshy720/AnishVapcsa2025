@@ -6,48 +6,57 @@ public class PigLatinTranslator {
 
     public static Book translate(Book input) {
         Book translatedBook = new Book();
-         
+        
         // TODO: Add code here to populate translatedBook with a translation of the
         // input book.
         // Curent do-nothing code will return an empty book.
         // Your code will need to call translate(String input) many times.
 
+        for(int i = 0; i<input.getLineCount(); i++){
+            translatedBook.appendLine(translateLine(input.getLine(i))); 
+        }
         return translatedBook;
-    }
+    } 
 
     public static String translate(String input) {
-
-        System.out.println("  -> translate('" + input + "')");
-       
-
-
-        // TODO: translate a string input, store in result.
-        // The input to this function could be any English string.
-        // It may be made up of many words.
-        // This method must call translateWord once for each word in the string.
-        String result = translateWord(input);
+        //System.out.println("  -> translate('" + input + "')");
+        Scanner scan = new Scanner(input); 
+        String result = ""; 
+        while(scan.hasNextLine()){
+            String line = scan.nextLine(); 
+            String lineTranslated = translateLine(line);
+            if(result.length()==0){
+                result = lineTranslated; 
+            }
+            else{
+                result = result + '\n' + lineTranslated; 
+            }
+        } 
+        scan.close(); 
         return result;
     }
 
-    private static String translateWord(String input) {
-        input = input.trim(); 
-        if(input.length()==0){
-            return input; 
-        }
-        String[] words = input.split("\\s+");
+    public static String translateLine(String input) {
+        //System.out.println("  -> translate('" + input + "')");
+        Scanner scan = new Scanner(input); 
         String result = ""; 
-        for(int i = 0; i<words.length; i++){
-            if(i==words.length-1){
-                result = result + translateSimpleWord(words[i]); 
+        while(scan.hasNext()){
+            String token = scan.next(); 
+            String tokenTranslated = translateWord(token);
+            if(result.length()==0){
+                result = tokenTranslated; 
             }
             else{
-                result = result + translateSimpleWord(words[i]) +" "; 
+                result = result + " " + tokenTranslated; 
             }
-        }
-        return result; 
+        } 
+        scan.close(); 
+        return result;
     }
+    
 
-    private static String translateSimpleWord(String input) {
+
+    private static String translateWord(String input) {
         //System.out.println("  -> translateWord('" + input + "')"); 
         
         input = input.trim(); 

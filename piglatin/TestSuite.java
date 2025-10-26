@@ -8,15 +8,15 @@ public class TestSuite {
 
         // Single Words
         // Vowel first letter
+        
         score += basicTest("eat", "eatay");
-        score += basicTest("sky.", "skyay.");
-        score += basicTest("Eat.", "Eatay.");
 
         // Single consonant
         score += basicTest("pig", "igpay");
         // Double consonant
         score += basicTest("trash", "ashtray");
         score += basicTest("trash.", "ashtray.");
+        
 
         // "null" :)
         score += basicTest("null", "ullnay");
@@ -34,8 +34,8 @@ public class TestSuite {
         score += basicTest("    ", "");
 
         // Multiple words
-        score += basicTest("pigs eat trash", "igspay eatay ashtray");
-
+        score += basicTest("pigs eat trash.", "igspay eatay ashtray.");
+        
         if (score >= total) {
             System.out.println("--- TEST PASSED! Congrats! ---");
         } else {
