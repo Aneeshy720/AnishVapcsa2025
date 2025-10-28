@@ -17,7 +17,7 @@ public class PigLatinTranslator {
         }
         return translatedBook;
     } 
-
+// implements translateLine() method into translate()
     public static String translate(String input) {
         //System.out.println("  -> translate('" + input + "')");
         Scanner scan = new Scanner(input); 
@@ -35,7 +35,7 @@ public class PigLatinTranslator {
         scan.close(); 
         return result;
     }
-
+//check if there is a next line and translates that line
     public static String translateLine(String input) {
         //System.out.println("  -> translate('" + input + "')");
         Scanner scan = new Scanner(input); 
@@ -55,7 +55,7 @@ public class PigLatinTranslator {
     }
     
 
-
+//translates a word with trailing punctuation 
     private static String translateWord(String input) {
         //System.out.println("  -> translateWord('" + input + "')"); 
         
@@ -80,7 +80,7 @@ public class PigLatinTranslator {
         // This is the first place to work.
         //result = input; // delete this line
     }
-     
+    //this method translates word that do not have a trailing punctuation mark at the end. 
     private static String translateSimpleWordWithoutTrailingPunc(String input) {
        //System.out.println("  -> translateWord('" + input + "')"); 
         //String[] words = input.split(" ");
@@ -121,7 +121,7 @@ public class PigLatinTranslator {
         //result = input; // delete this line
     }
 
-
+    //small method to check is a letter is a vowel or not
     private static boolean isVowel(char ch){
         return ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'||
         ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U'; 
