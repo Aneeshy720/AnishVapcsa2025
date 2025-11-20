@@ -24,7 +24,6 @@ public class Deck {
         if(num<1 || num>playingCards.length ){  
             return;
         }
-        
 
         Card[] cutPlayingCards = new Card[Card.SUIT.length * Card.VALUE.length];
         for(int i = num; i<playingCards.length; i++){
