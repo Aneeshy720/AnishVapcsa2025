@@ -3,6 +3,7 @@ package cards;
 public class Deck {
     private int currentCardIndex = 0; 
     private Card[] playingCards = new Card[Card.SUIT.length * Card.VALUE.length]; // making the size of the array 52 
+    
     public Deck(){
         int index = 0; 
         for(int suit = 0; suit<Card.SUIT.length; suit++){
@@ -63,6 +64,7 @@ public class Deck {
     }
 
     public static void main(String[] args){
+        //test class
         Deck deck = new Deck();
         for(int i = 0; i<53; i++){
             System.out.println(deck.draw()); 

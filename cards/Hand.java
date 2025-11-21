@@ -9,7 +9,7 @@ public class Hand {
         cards = new Card[maxNumCards];
     }
     
-
+//add one card
     public void add(Card oneCard){
         if(numCards < cards.length){
             cards[numCards] = oneCard; 
@@ -20,7 +20,7 @@ public class Hand {
     public int length(){
         return numCards; 
     }
-
+    //gets a card   
     public Card get(int index){
         if(index>=0 && index < numCards){
             return cards[index]; 
@@ -28,6 +28,7 @@ public class Hand {
         return null;
     }
 
+    //removes one card the positions of the cards after it are shifted one position back to kill in the empty gap. 
     public Card remove(int index){
         Card returnCard = get(index); 
         if(returnCard!=null){          
@@ -45,6 +46,7 @@ public class Hand {
         return null;   
     }
 
+    //toString() method called automatically for formatting
     public String toString(){
         String str = ""; 
         for(int i = 0; i<numCards; i++){
@@ -60,6 +62,7 @@ public class Hand {
     }
 
     public static void main(String[] args){
+        //test class
         Hand hand = new Hand(10);
         hand.add(new Card(0, 9)); 
         hand.add(new Card(0, 4));

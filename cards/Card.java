@@ -3,6 +3,7 @@ package cards;
 public class Card {
     private int suit; 
     private int value; 
+    //these are declared as final and public because they are used throughout the project and cannot be changed
     public static final String[] SUIT = {"♦", "♣", "♥", "♠"}; 
     public static final String[] VALUE = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
@@ -37,6 +38,7 @@ public class Card {
     }
 
     public static void main(String[] args){
+        //testing this class
         System.out.println(new Card(0, 10)); 
         System.out.println(new Card(-11, 10));
         System.out.println(new Card(2, 15));
