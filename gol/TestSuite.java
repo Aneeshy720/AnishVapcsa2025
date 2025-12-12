@@ -24,7 +24,7 @@ public class TestSuite {
         // Set the bottom middle neighbor.
         board.set(3, 2, data);
         pass &= expect(board.countNeighbors(2,2), 2, "Single live cell with two neighbors");
-
+        board.print(); 
         // Test update state
         board.step();
         board.print();
