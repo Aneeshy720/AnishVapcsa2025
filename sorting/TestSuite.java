@@ -33,6 +33,12 @@ public class TestSuite
         }
     }
 
+    public static void printArray(int[] unsorted){
+        for(int i = 0; i<unsorted.length; i++){
+            System.out.print(unsorted[i]+" "); 
+        }
+    }
+
     public static boolean basicTest(Sorter s, int[] unsorted, int loops)
     {
         boolean result = false;
@@ -40,19 +46,25 @@ public class TestSuite
         System.out.println("\n--- Testing: " + className + " ---");
 
         // Save the start time of the test loop.
-        long startTime = System.nanoTime();
+        printArray(unsorted);
+        double duration = 0.0; 
+        //long startTime = System.nanoTime();
         for (int x = 0; x < loops; x++) {
             // Copy the unsorted array to avoid sorting it.
             int[] test = unsorted.clone();
-            // Sort the test array.
+            long startTime = System.nanoTime();
+
+            // Sort the test array
             s.sort(test);
+            long endTime = System.nanoTime();
+            duration += (endTime - startTime) / 1000000000.0;
             // Check the results
             result = checkResults(test, unsorted);
         }
-        long endTime = System.nanoTime();
+        //long endTime = System.nanoTime();
 
         // Compute the duration in seconds.
-        double duration = (endTime - startTime) / 1000000000.0;
+        //double duration = (endTime - startTime) / 1000000000.0;
         // Print results
         System.out.println(className + " took: " + duration + " seconds for " + loops + " loops.");
 
@@ -74,12 +86,15 @@ public class TestSuite
 
         // Traverse the array, looking for elements that are out of order.
         for (int i = 0; i < sorted.length - 1; i++) {
-            // If we find a single out of order element, then stop - the array is UNSORTED!
+            // If we find a single out of order element, then stop - the array is UNSORTED!'
+            System.out.print(sorted[i]+" "); 
             if (sorted[i] > sorted[i + 1]) {
                 System.out.println("Error! sorted[" + i + "] (" + sorted[i] + " > sorted[" + i + 1 + "] (" + sorted[i + 1] + ")");
                 return false;
             }
+             
         }
+        System.out.println(sorted[sorted.length-1]);
         return true;
     }
 }
