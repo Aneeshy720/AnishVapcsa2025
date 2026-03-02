@@ -53,7 +53,7 @@ public class IrregularPolygon {
                 area += (current.getX()*next.getY()) - (current.getY()*next.getX()); 
             }
         }
-        return Math.abs(area) / 2.0;
+        return 0.5 * Math.abs(area);
     }
 
     public void draw()
@@ -63,7 +63,9 @@ public class IrregularPolygon {
             // TODO: Draw the polygon.
             // Documents: https://pavao.org/compsci/gpdraw/html/gpdraw/DrawingTool.html
             DrawingTool myDrawingTool = new DrawingTool(new SketchPad(500, 500));
-            myDrawingTool.move(50, 50);
+            //myDrawingTool.move(50, 50);
+            myDrawingTool.up(); 
+            
         } catch (java.awt.HeadlessException e) {
             System.out.println("Exception: No graphics support available.");
         }
