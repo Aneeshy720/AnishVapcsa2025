@@ -22,11 +22,11 @@ public class TowerSolver {
         }
         else{
             solve(source, intermediate, destination, height - 1); 
-            //model.print(); 
+            model.print(); 
             model.move(source, destination); 
-            //model.print(); 
+            model.print(); 
             solve(intermediate, destination, source, height-1); 
-           // model.print(); 
+            model.print(); 
         } 
     }
     // Create an overloaded solve(...) method
