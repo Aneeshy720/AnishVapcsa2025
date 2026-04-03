@@ -50,6 +50,7 @@ public class TowerModel {
     {
         System.out.println("Move #" + ++moveCounter + " from " + source + " to " + destination);
         // TODO!!
+        towers[destination].push(towers[source].pop()); 
     }
 
     // Helper method to nicely print the current model state.
@@ -75,6 +76,12 @@ public class TowerModel {
             System.out.print(" =");
         }
         System.out.println();
+        try{
+            Thread.sleep(1000); 
+        }
+        catch(Exception ex){
+
+        }
     }
 
     // Test instrumentation

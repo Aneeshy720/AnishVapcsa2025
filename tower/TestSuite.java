@@ -16,7 +16,7 @@ public class TestSuite {
         pass = true;
         score = 0;
         maxScore = 0;
-
+        
         // Part 1: Model
         TowerModel tiny = new TowerModel(2);
         // Check height
@@ -37,7 +37,7 @@ public class TestSuite {
 
         // Check that move failed.
         expectEqual(towers[2].get(1), 0, "disk 2 should not have moved");
-
+    
         // Part 2: Solver
         TowerModel hanoi = new TowerModel(3);
         towers = hanoi.getTowers();
